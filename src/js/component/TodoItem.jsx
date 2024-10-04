@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoItem = ({ task, deleteTask }) => {
+const TodoItem = ({ task, index, deleteTask }) => {
   return (
     <li
       className="todo-item"
@@ -8,7 +8,7 @@ const TodoItem = ({ task, deleteTask }) => {
       onMouseLeave={(e) => e.currentTarget.classList.remove("hover")}
     >
       {task.label}
-      <span className="delete-icon" onClick={() => deleteTask(task.id)}>
+      <span className="delete-icon" onClick={() => deleteTask(index)}>
         🗑️
       </span>
     </li>

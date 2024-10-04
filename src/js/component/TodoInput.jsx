@@ -10,8 +10,8 @@ const TodoInput = ({ addTask }) => {
 
   // Añadir tarea cuando se presiona Enter
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      addTask(inputValue);
+    if (e.key === "Enter" && inputValue.trim() !== "") {
+      addTask(inputValue.trim());
       setInputValue("");
     }
   };

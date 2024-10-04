@@ -7,37 +7,32 @@ const App = () => {
 
   // Cargar tareas desde la API al montar el componente
   useEffect(() => {
-    fetch("https://playground.4geeks.com/todo/users/yshungria")
+    fetch("https://playground.4geeks.com/todo/todos/yshungria")
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al obtener las tareas");
+          throw new Error("Error al cargar las tareas");
         }
         return response.json();
       })
-      .then((data) => {
-        setTasks(data);
-      })
+      .then((data) => setTasks(data))
       .catch((error) => console.error("Error:", error));
-  }, []);
+  });
 
   // Actualizar tareas en la API cada vez que cambien las tareas
   useEffect(() => {
-    if (tasks.length > 0) {
-      fetch("https://playground.4geeks.com/todo/users/yshungria", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(tasks),
+    fetch("https://playground.4geeks.com/todo/todos/yshungria", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(tasks),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al guardar las tareas");
+        }
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error al actualizar las tareas");
-          }
-          return response.json();
-        })
-        .catch((error) => console.error("Error:", error));
-    }
+      .catch((error) => console.error("Error:", error));
   }, [tasks]);
 
   // Añadir una nueva tarea
